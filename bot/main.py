@@ -1,11 +1,10 @@
-
 import os
 import logging
 from pyrogram import Client
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(__name)
 
 # Initialize the Pyrogram Client
 api_id = os.getenv("API_ID")
