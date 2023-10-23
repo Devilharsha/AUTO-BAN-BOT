@@ -4,7 +4,7 @@ from pyrogram import Client
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name)
+logger = logging.getLogger(__name__)
 
 def setup_handlers(app):
     from handlers import setup_handlers  # Import this function here to avoid circular import
