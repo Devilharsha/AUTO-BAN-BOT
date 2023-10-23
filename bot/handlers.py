@@ -15,7 +15,7 @@ def setup_handlers(client):
                 logger.info(f"Banning user: {user.first_name} (ID: {user.id})")
                 await client.kick_chat_member(chat_id, user.id)
         except Exception as e:
-            logger.error(f"An error occurred: {str(e})")
+            logger.error(f"An error occurred: {str(e)}")  # Fixed the f-string here
 
     @client.on_message(filters.command("start") & filters.chat(chat_id))
     async def start_command(client, message):
