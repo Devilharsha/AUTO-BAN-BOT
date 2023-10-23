@@ -1,4 +1,4 @@
-import os 
+import os
 from pyrogram import filters
 from main import logger
 
@@ -8,7 +8,7 @@ chat_id = os.getenv("CHAT_ID")
 # Function to set up message handlers
 def setup_handlers(client):
     @client.on_message(filters.chat(chat_id) & filters.left_chat_member)
-    async def on_member_left(client, message):
+    async def on_member_left(_, message):
         member = message.left_chat_member
         try:
             if member:
@@ -16,12 +16,13 @@ def setup_handlers(client):
                 logger.info(f"Banning user: {user.first_name} (ID: {user.id})")
                 await client.kick_chat_member(chat_id, user.id)
         except Exception as e:
-            logger.error(f"An error occurred: {str(e)}")  # Fixed the f-string here
+            error_message = str(e)
+            logger.error(f"An error occurred: {error_message}")
 
-    @client.on_message(filters.command("start") & filters.chat(chat_id))
-    async def start_command(client, message):
+    @client.on_message(filters.command(["start", "/start"]) & filters.chat(chat_id) | filters.private)
+    async def start_command(_, message):
         await message.reply_text("Welcome to the Channel Monitor Bot! I will automatically ban members who leave the channel.")
 
-    @client.on_message(filters.command("ping") & filters.chat(chat_id))
-    async def ping_command(client, message):
+    @client.on_message(filters.command("ping") & filters.chat(chat_id) | filters.private)
+    async def ping_command(_, message):
         await message.reply_text("Pong!")
