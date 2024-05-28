@@ -21,7 +21,7 @@ def setup_handlers(client):
 
     @client.on_message(filters.command(["start", "/start"]) & filters.chat(chat_id) | filters.private)
     async def start_command(_, message):
-        await message.reply_text("Welcome to the Channel Monitor Bot! I will automatically ban members who leave the channel.")
+        await message.reply_text("Welcome to the Channel Monitor Bot! I will automatically ban members who leave the channel andd never allow them.")
 
     @client.on_message(filters.command("ping") & filters.chat(chat_id) | filters.private)
     async def ping_command(_, message):
